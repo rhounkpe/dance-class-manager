@@ -18,8 +18,8 @@ public class Main {
         agenda = new Agenda();
 
         DanceClass tango = new DanceClass("Cours de Tango", Room.BERLIN, LocalDate.now());
-        agenda.addDanceClass(tango);
-        agenda.addDanceClass(tango);
+        agenda.addDanceClass("Cours de Tango", "BERLIN", "10 02 2020");
+        agenda.addDanceClass("Cours de Salsa", "Tokyo", "10 03 2020");
         agenda.getEventList();
 
 
