@@ -31,15 +31,20 @@ public class Main {
 
         String option = sc.next();
 
+        //TODO: Option should an enum
         switch (option) {
             case "1": encodeDanceClass(sc);
-                return option;
+                break;
             case "2": displayDanceClasses();
-                return option;
-            default:
-                System.out.println("Invalid option, please re-enter your choice!");
-                return option;
+                break;
+            default: System.out.println("Invalid option, please re-enter your choice!");
+                break;
         }
+        return option;
+    }
+
+    private static void exit(Scanner sc) {
+
     }
 
     /**
@@ -47,15 +52,16 @@ public class Main {
      * @param sc
      */
     private static void encodeDanceClass(Scanner sc) {
-        System.out.println("Please enter Dance Class info");
         sc.nextLine();
-        System.out.println("Dance Class name: ");
+        System.out.println("Please enter Dance Class info");
+
+        System.out.print("Dance Class name: ");
         String name = sc.nextLine();
 
-        System.out.println("Where?: ");
+        System.out.print("Where?: ");
         String roomKey = sc.nextLine();
 
-        System.out.println("When? (MM dd yyyy): ");
+        System.out.print("When? (MM dd yyyy): ");
         String date = sc.nextLine();
 
         try {
