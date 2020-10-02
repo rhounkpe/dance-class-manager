@@ -48,4 +48,11 @@ public class DanceClass extends DanceEvent {
         this.teacher = teacher;
     }
 
+    @Override
+    public String toString() {
+        return name + " le " + day;
+    }
+
+    // TODO: Override equals
+    // TODO: Override hashCode
 }
