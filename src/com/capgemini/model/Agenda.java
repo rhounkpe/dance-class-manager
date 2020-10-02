@@ -20,11 +20,20 @@ public class Agenda {
     }
 
     public void addDanceClass(String name, String roomKey, String day) {
+        LocalDate localDate;
+        DanceClass danceClass;
         Room room = Room.valueOf(roomKey.toUpperCase());
+        Locale fr = Locale.FRANCE;
 
-        LocalDate localDate = LocalDate.parse(day, DateTimeFormatter.ofPattern("MM dd yyyy", Locale.FRANCE));
+        try {
+            localDate = LocalDate.parse(day, DateTimeFormatter.ofPattern("MM dd yyyy", fr));
+        } catch (Throwable t) {
+            throw new RuntimeException("Unable to create date from: [" +
+                    day.toUpperCase() +
+            "], please enter a date with this format [MM dd yyyy]");
+        }
 
-        DanceClass danceClass = new DanceClass(name, room, localDate);
+        danceClass = new DanceClass(name, room, localDate);
         eventList.add(danceClass);
 
     }
