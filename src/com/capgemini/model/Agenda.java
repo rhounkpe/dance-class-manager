@@ -2,9 +2,7 @@ package com.capgemini.model;
 
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 public class Agenda {
@@ -20,18 +18,9 @@ public class Agenda {
     }
 
     public void addDanceClass(String name, String roomKey, String day) {
-        LocalDate localDate;
         DanceClass danceClass;
         Room room = Room.valueOf(roomKey.toUpperCase());
-        Locale fr = Locale.FRANCE;
-
-        try {
-            localDate = LocalDate.parse(day, DateTimeFormatter.ofPattern("MM dd yyyy", fr));
-        } catch (Throwable t) {
-            throw new RuntimeException("Unable to create date from: [" +
-                    day.toUpperCase() +
-            "], please enter a date with this format [MM dd yyyy]");
-        }
+        LocalDate localDate = com.capgemini.utils.DateTimeFormatter.convertStringToLocaleDate(day);
 
         danceClass = new DanceClass(name, room, localDate);
         eventList.add(danceClass);
