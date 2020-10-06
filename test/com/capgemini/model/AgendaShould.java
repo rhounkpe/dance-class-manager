@@ -4,8 +4,11 @@ import com.capgemini.utils.DateTimeFormatter;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +40,28 @@ class AgendaShould {
 
         assertEquals(1, danceClasses.size());
 
+
+        danceClasses
+                .stream()
+                .map(ds -> {
+                    if (Objects.nonNull(ds)) {
+                        if(ds.getTime() != null) {
+                            if (ds.getTime().equals(LocalTime.now())) {
+                                ds.setTime(LocalTime.parse("11 25 2020"));
+                            }
+                        }
+                    } else {
+                        try {
+                            throw new Exception("This element may not exist...");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return ds;
+
+                }).collect(Collectors.toList());
+
+
     }
 
     @Nested
@@ -61,6 +86,16 @@ class AgendaShould {
             DanceClass tango = (DanceClass) danceClasses.toArray()[0];
             // assertEquals("10 13 2020", tango.getDay().format(DateTimeFormatter.ofPattern("MM dd yyyy", )));
             assertSame(Room.DENVER, tango.getRoom());
+        }
+
+        @Test
+        @DisplayName("throw exception if entered pattern of string incorrect")
+        void throwExceptionIfIncorrectDatePattern() {
+            Throwable error = assertThrows(RuntimeException.class, () -> DateTimeFormatter.convertStringToLocaleDate("10 13 TT 2020"));
+
+            // agenda.addDanceClass("Bachata Dominicaine", "denver", "10 13 TT 2020");
+            String errorMsg = "Unable to create date from: [10 13 TT 2020], please enter a date with this format [MM dd yyyy]";
+            assertEquals(errorMsg, error.getMessage());
         }
     }
 
