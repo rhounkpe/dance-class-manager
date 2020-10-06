@@ -67,5 +67,27 @@ class OptionalDemoShould {
         }
     }
 
-    //
+    /**
+     * Dans le cas de test précédent, nous avons vérifier que l'heure du cours existe bel et bien.
+     * Si l'heure n'existe pas, nous renvoyons un Optional.empty()
+     * Sinon nous renvoyons un Optional construit avec Optional.of(danceClass.getTime())
+     *
+     * Ce pattern est si courant que Java fournie une "factory method" pour faire la même chose.
+     * Utilisez Optional.Nullable(danceClass) pour faire la même chose (Google, StackOverFlow, Java Doc... sont vos amis)
+     */
+    @Test
+    void useFactoryMethodOfNullable() {
+        DanceClass danceClass = new DanceClass("Cours de Lindy Hop", Room.HELSINKI, LocalDate.of(2020, 10, 30));
+
+
+        // Créez l'optional ici
+        Optional timeOptional = .....
+
+        // L'heure du cours sera désormais à l'heure courante de la Zone HELSINKI
+        // Indice UTC
+        // Créez une heure au time zone de Paris et comparer si l'heure du cours est la même que l'heure de Paris
+        // Créer une une heure au time zone de Brussels et comparer avec l'heure de Paris
+
+
+    }
 }
